@@ -1,5 +1,8 @@
-package com.sita.mob.controller.wizard.dummy;
+package com.sita.mob.controller.wizard.input;
 
+import android.content.Context;
+import com.sita.mob.R;
+import com.sita.mob.model.Facility;
 import com.sita.mob.model.FacilityItem;
 
 import java.util.ArrayList;
@@ -18,21 +21,21 @@ public class FacilityContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static List<FacilityItem> ITEMS = new ArrayList<FacilityItem>();
+    public List<FacilityItem> ITEMS = new ArrayList<FacilityItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
+    public Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
 
-    static {
+    public FacilityContent(Context context) {
         // Add 3 sample items.
-        addItem(new FacilityItem("1", "Ramps Not Available!"));
+        addItem(new FacilityItem("1", context.getString(R.string.drinkingWater)));
         addItem(new FacilityItem("2", "Ramps - no handrails"));
         addItem(new FacilityItem("3", "Good ramps"));
     }
 
-    private static void addItem(FacilityItem item) {
+    private void addItem(FacilityItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }

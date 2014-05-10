@@ -17,8 +17,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.sita.mob.R;
-import com.sita.mob.controller.wizard.dummy.FacilityContent;
-import com.sita.mob.controller.wizard.dummy.LibContent;
+import com.sita.mob.controller.wizard.input.FacilityContent;
+import com.sita.mob.controller.wizard.input.LibContent;
 import com.sita.mob.model.FacilityItem;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +42,8 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     ParseFile photoFile;
     int parameter;
     int position;
+
+    FacilityContent fac;
 
     public static final int BARRIER = 0;
     public static final int TOILETS = 1;
@@ -161,8 +163,9 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
 
         switch(position) {
             case BARRIER:
+                fac = new FacilityContent(getActivity());
                 mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, FacilityContent.ITEMS);
+                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, fac.ITEMS);
                 break;
             case TOILETS:
                 mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
@@ -200,11 +203,14 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
             case BARRIER:
                 descr.setText(getString(R.string.ramp_descr));
                 break;
-            case 1:
-                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
+            case TOILETS:
                 break;
-            case 2:
+            case DRINKING:
+                break;
+            case PLAYGROUND:
+                break;
+            case LIB:
+
                 break;
 
         }
@@ -255,7 +261,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(FacilityContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(fac.ITEMS.get(position).id);
             parameter = position;
         }
     }

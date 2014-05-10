@@ -1,5 +1,7 @@
-package com.sita.mob.controller.wizard.dummy;
+package com.sita.mob.controller.wizard.input;
 
+import android.app.Activity;
+import android.content.Context;
 import com.sita.mob.model.FacilityItem;
 
 import java.util.ArrayList;
