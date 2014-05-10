@@ -3,7 +3,6 @@ package com.sita.mob.controller.facility;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.sita.mob.R;
 import com.sita.mob.controller.wizard.dummy.FacilityContent;
+import com.sita.mob.controller.wizard.dummy.LibContent;
 import com.sita.mob.model.FacilityItem;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +38,21 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     private Button mSaveBtn;
     private String facilityNumber = "1";
     private String schoolCode = "24010309102";
+    private TextView descr;
     ParseFile photoFile;
+    int parameter;
+    int position;
+
+    public static final int BARRIER = 0;
+    public static final int TOILETS = 1;
+    public static final int DRINKING = 2;
+    public static final int PLAYGROUND = 3;
+    public static final int LIB = 4;
+
+    //public static final int
+    //public static final int
+
+
 
     Button.OnClickListener mTakePicOnClickListener =
             new Button.OnClickListener() {
@@ -68,9 +82,10 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static FacilityFragment newInstance() {
+    public static FacilityFragment newInstance(int position) {
         FacilityFragment fragment = new FacilityFragment();
         Bundle args = new Bundle();
+        args.putInt("POS", position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -142,16 +157,30 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        position = getArguments().getInt("POS");
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                android.R.layout.simple_list_item_single_choice, android.R.id.text1, FacilityContent.ITEMS);
+        switch(position) {
+            case BARRIER:
+                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
+                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, FacilityContent.ITEMS);
+                break;
+            case TOILETS:
+                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
+                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
+                break;
+            case DRINKING:
+                // TODO
+                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
+                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
+                break;
+
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stepwithlistfragment, container, false);
+        View view = inflater.inflate(R.layout.facility_view, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -165,7 +194,28 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
         mSaveBtn = (Button)view.findViewById(R.id.save_button);
         mSaveBtn.setOnClickListener(mSaveOnClickListener);
 
+        descr = (TextView) view.findViewById(R.id.descr);
+
+        switch(position) {
+            case BARRIER:
+                descr.setText(getString(R.string.ramp_descr));
+                break;
+            case 1:
+                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
+                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
+                break;
+            case 2:
+                break;
+
+        }
+
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -184,7 +234,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
         report.put("schoolCode", schoolCode);
         report.put("facilityNumber", facilityNumber);
         report.put("comments", "dummyComments");
-        report.put("parameterNumber", 3);
+        report.put("parameterNumber", parameter+1);
         if (photoFile != null) {
             report.put("fileName", photoFile);
         }
@@ -206,6 +256,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(FacilityContent.ITEMS.get(position).id);
+            parameter = position;
         }
     }
 

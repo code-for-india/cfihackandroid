@@ -16,6 +16,7 @@ import com.parse.ParseObject;
 import com.sita.mob.R;
 import com.sita.mob.controller.facility.FacilityFragment;
 import com.sita.mob.controller.facility.RampsFragment;
+import com.sita.mob.model.Facility;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, FacilityFragment.OnFragmentInteractionListener {
@@ -58,7 +59,7 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, RampsFragment.newInstance())
+                .replace(R.id.container, FacilityFragment.newInstance(position))
                 .commit();
     }
 
