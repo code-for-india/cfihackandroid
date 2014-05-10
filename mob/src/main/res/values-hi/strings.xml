@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Sita</string>
+    <string name="app_name">सीता</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -22,7 +22,7 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_grid">GridActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_facility_grid">Choose Facility to Report</string>
+    <string name="title_activity_facility_grid">रिपोर्ट करने के लिए सुविधा चुनें</string>
 
     <!-- LIBRARY -->
     <string name="lib_descr">लाइब्रेरी में बच्चों के लिए एक महत्वपूर्ण सुविधा है. स्थिति क्या है?</string>
