@@ -25,13 +25,13 @@
     <string name="title_activity_facility_grid">Choose Facility to Report</string>
 
     <!-- LIBRARY -->
-    <string name="lib_descr">Library is an important facility for kids. What\'s the status?</string>
-    <string name="lib_na">Library facility - not available </string>
-    <string name="lib_insuff">Library facility - Insufficient number of books </string>
-    <string name="lib_no_time"> Library facility - No time alloted in the timetable </string>
-    <string name="lib_beyond">Library facility - Books kept beyond student\'s reach </string>
-    <string name="lib_locked"> Library facility Locked </string>
-    <string name="lib_stocked">Well stocked library </string>
+    <string name="lib_descr">लाइब्रेरी में बच्चों के लिए एक महत्वपूर्ण सुविधा है. स्थिति क्या है?</string>
+    <string name="lib_na">पुस्तकालय की सुविधा - उपलब्ध नहीं</string>
+    <string name="lib_insuff">पुस्तकालय की सुविधा - पुस्तकों की अपर्याप्त संख्या</string>
+    <string name="lib_no_time"> पुस्तकालय की सुविधा - सारिणी में आवंटित समय नहीं</string>
+    <string name="lib_beyond">पुस्तकालय की सुविधा - पुस्तकें छात्र  की पहुंच से परे रखा </string>
+    <string name="lib_locked"> बन्द लाइब्रेरी सुविधा</string>
+    <string name="lib_stocked">अच्छी तरह से स्टॉक पुस्तकालय</string>
 
     <!-- TOILED -->
     <string name="toilet_descr">Bad restroom infrastructure is a BIG health hazard. Please report.</string>
