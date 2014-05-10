@@ -1,8 +1,7 @@
-package com.sita.mob.controller.wizard.input;
+package com.sita.mob.datasource;
 
 import android.content.Context;
 import com.sita.mob.R;
-import com.sita.mob.model.Facility;
 import com.sita.mob.model.FacilityItem;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class FacilityContent {
+public class RampContent {
 
     /**
      * An array of sample (dummy) items.
@@ -28,11 +27,14 @@ public class FacilityContent {
      */
     public Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
 
-    public FacilityContent(Context context) {
+    public RampContent(Context context) {
         // Add 3 sample items.
-        addItem(new FacilityItem("1", context.getString(R.string.drinkingWater)));
-        addItem(new FacilityItem("2", "Ramps - no handrails"));
-        addItem(new FacilityItem("3", "Good ramps"));
+        addItem(new FacilityItem("1", context.getString(R.string.ramp_right)));
+        addItem(new FacilityItem("2", context.getString(R.string.ramp_uneven)));
+        addItem(new FacilityItem("3", context.getString(R.string.ramp_wrong)));
+        addItem(new FacilityItem("4", context.getString(R.string.ramp_no_hand)));
+        addItem(new FacilityItem("5", context.getString(R.string.ramp_blocked)));
+        addItem(new FacilityItem("6", context.getString(R.string.ramp_no)));
     }
 
     private void addItem(FacilityItem item) {

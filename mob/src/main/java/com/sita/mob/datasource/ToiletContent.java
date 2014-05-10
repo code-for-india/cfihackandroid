@@ -1,4 +1,4 @@
-package com.sita.mob.controller.wizard.input;
+package com.sita.mob.datasource;
 
 import android.content.Context;
 import com.sita.mob.R;

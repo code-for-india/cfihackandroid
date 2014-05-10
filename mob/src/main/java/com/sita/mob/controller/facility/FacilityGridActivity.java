@@ -1,4 +1,4 @@
-package com.sita.mob.controller;
+package com.sita.mob.controller.facility;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -23,15 +23,12 @@ public class FacilityGridActivity extends ActionBarActivity {
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
 
-        // App stuff
-        Parse.initialize(this, "3P4Yf9CyJU9up39DrDEvfxrEkBXFvqkTopkSJRNl", "dX08aQhiuE3ndPo4K2hY30lhxHfaMPHPUwi9sE5U");
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Toast.makeText(FacilityGridActivity.this, "" + pos, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(FacilityGridActivity.this, MainActivity.class);
-                intent.putExtra(NavigationDrawerFragment.STATE_SELECTED_POSITION, pos);
+                Intent intent = new Intent(FacilityGridActivity.this, FacilityActivity.class);
+                intent.putExtra(FacilityFragment.NavigationDrawerFragment.STATE_SELECTED_POSITION, pos);
                 startActivity(intent);
             }
         });

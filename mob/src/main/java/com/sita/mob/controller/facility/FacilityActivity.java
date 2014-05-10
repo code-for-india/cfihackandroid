@@ -1,25 +1,22 @@
-package com.sita.mob.controller;
+package com.sita.mob.controller.facility;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.*;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.sita.mob.R;
-import com.sita.mob.controller.facility.FacilityFragment;
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FacilityFragment.OnFragmentInteractionListener {
+public class FacilityActivity extends ActionBarActivity
+        implements FacilityFragment.NavigationDrawerFragment.NavigationDrawerCallbacks, FacilityFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private FacilityFragment.NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -31,7 +28,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        mNavigationDrawerFragment = (FacilityFragment.NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
@@ -40,8 +37,8 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-            int pos = getIntent().getIntExtra(NavigationDrawerFragment.STATE_SELECTED_POSITION, 0);
-            Log.e("SITA", pos + "");
+        int pos = getIntent().getIntExtra(FacilityFragment.NavigationDrawerFragment.STATE_SELECTED_POSITION, 0);
+        Log.e("SITA", pos + "");
 
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();

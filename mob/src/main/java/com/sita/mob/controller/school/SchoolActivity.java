@@ -9,7 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import com.parse.*;
 import com.sita.mob.R;
-import com.sita.mob.controller.MainActivity;
+import com.sita.mob.controller.facility.FacilityGridActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class SchoolActivity extends Activity {
             public void onClick(View view) {
                 String schoolCode = schoolNameIdMap.get(textView.getText().toString().trim());
                 if (schoolCode != null) {
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    Intent intent = new Intent(getBaseContext(), FacilityGridActivity.class);
                     intent.putExtra("schoolCode", schoolCode);
                     startActivity(intent);
                 }
