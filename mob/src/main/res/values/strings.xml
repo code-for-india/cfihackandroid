@@ -22,6 +22,6 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_grid">GridActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="title_activity_facility_grid">FacilityGridActivity</string>
 
 </resources>
