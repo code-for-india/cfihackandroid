@@ -1,0 +1,17 @@
+<!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="Please enter your School Name" style="@style/text_description"/>
+
+    <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:id="@+id/school_input"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content" android:layout_marginTop="30dip" style="@style/text_input" />
+
+    <Button android:id="@+id/school_submit_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="20dip" android:text="Start"/>
+
+</LinearLayout>
