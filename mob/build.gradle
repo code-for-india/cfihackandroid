@@ -32,7 +32,6 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:19.+'
-    compile 'org.codepond:wizardroid:1.2.0'
     compile 'com.android.support:support-v4:19.+'
     compile files('libs/Parse-1.5.0/Parse-1.5.0.jar')
     compile fileTree(dir: 'libs', include: ['*.jar'])

@@ -10,4 +10,18 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <!-- TITLES -->
+    <string name="ramp">Ramp (Barrier-free Access)</string>
+    <string name="toilet">Toilet</string>
+    <string name="drinkingWater">Drinking Water</string>
+    <string name="playground">Playground</string>
+    <string name="lib">Library</string>
+
+    <!-- RAMP -->
+    <string name="ramp_descr">Report the status of barrier-free access (ramps) in the school.</string>
+    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="title_activity_grid">GridActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+
 </resources>
