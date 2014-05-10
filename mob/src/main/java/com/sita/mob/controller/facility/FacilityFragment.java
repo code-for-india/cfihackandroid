@@ -12,13 +12,11 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.parse.*;
@@ -275,6 +273,8 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
                 return new ToiletContent(getActivity()).ITEMS;
             case DRINKING:
                 return new DrinkingContent(getActivity()).ITEMS;
+            case PLAYGROUND:
+                return  new PlaygroundContent(getActivity()).ITEMS;
             case LIB:
                 return new LibContent(getActivity()).ITEMS;
         }

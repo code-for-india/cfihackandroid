@@ -26,13 +26,11 @@ public class DrinkingContent {
 
     public DrinkingContent(Context context) {
         // Add 3 sample items.
-        addItem(new FacilityItem("1", context.getString(R.string.lib_stocked)));
-        addItem(new FacilityItem("2", context.getString(R.string.lib_locked)));
-        addItem(new FacilityItem("3", context.getString(R.string.lib_beyond)));
-        addItem(new FacilityItem("4", context.getString(R.string.lib_no_time)));
-        addItem(new FacilityItem("5", context.getString(R.string.lib_insuff)));
-        addItem(new FacilityItem("6", context.getString(R.string.lib_na)));
-
+        addItem(new FacilityItem("1", context.getString(R.string.drink_clean)));
+        addItem(new FacilityItem("2", context.getString(R.string.drink_supply)));
+        addItem(new FacilityItem("3", context.getString(R.string.drink_not_clean)));
+        addItem(new FacilityItem("4", context.getString(R.string.drink_blocked)));
+        addItem(new FacilityItem("5", context.getString(R.string.drink_na)));
     }
 
     private void addItem(FacilityItem item) {

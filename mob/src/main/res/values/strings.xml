@@ -43,7 +43,7 @@
     <string name="toilet_water">No Water</string>
     <string name="toilet_sewage">No Sewage mechanism</string>
     <string name="toilet_na">Not available</string>
-    <string name="drinking_descr">Water is key to human life. How is watter supply in the school?</string>
+    <string name="drinking_descr">Water is key to human life. How is water supply in the school?</string>
     <string name="playground_descr">Sports promotes fitness and team skills. Are playgrounds in the school good?
     </string>
     <string name="ramp_right">Ramps with right incline and even surfaces</string>
@@ -52,4 +52,14 @@
     <string name="ramp_no_hand">Ramps available but no handrails</string>
     <string name="ramp_blocked">Ramps available but blocked</string>
     <string name="ramp_no">Ramps do not exist</string>
+    <string name="drink_clean">Clean water available</string>
+    <string name="drink_supply">No water supply</string>
+    <string name="drink_not_clean">Water is not clean</string>
+    <string name="drink_blocked">Drinking water blocked / wrong height</string>
+    <string name="drink_na">Water not available</string>
+    <string name="play_well">Playground well maintained</string>
+    <string name="play_rocky">Rocky</string>
+    <string name="play_uneven">Uneven</string>
+    <string name="play_used">Used for other purposes</string>
+    <string name="play_not">Does not exist</string>
 </resources>
