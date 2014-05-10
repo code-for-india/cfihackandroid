@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import com.sita.mob.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
@@ -31,7 +32,7 @@ public class ImageAdapter extends BaseAdapter {
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
+            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
         } else {
@@ -44,7 +45,7 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            android.R.drawable.sym_def_app_icon, android.R.drawable.sym_def_app_icon,
-            android.R.drawable.sym_def_app_icon
+            R.drawable.ramp, R.drawable.restroom,
+            R.drawable.water, R.drawable.playground, R.drawable.lib
     };
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,11 +18,15 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.sita.mob.R;
+import com.sita.mob.controller.wizard.input.DrinkingContent;
 import com.sita.mob.controller.wizard.input.FacilityContent;
 import com.sita.mob.controller.wizard.input.LibContent;
+import com.sita.mob.controller.wizard.input.ToiletContent;
 import com.sita.mob.model.FacilityItem;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * STEP in wizard - each facility.
@@ -44,6 +49,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     int position;
 
     FacilityContent fac;
+    LibContent lib;
 
     public static final int BARRIER = 0;
     public static final int TOILETS = 1;
@@ -160,24 +166,8 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt("POS");
-
-        switch(position) {
-            case BARRIER:
-                fac = new FacilityContent(getActivity());
-                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, fac.ITEMS);
-                break;
-            case TOILETS:
-                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
-                break;
-            case DRINKING:
-                // TODO
-                mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                        android.R.layout.simple_list_item_single_choice, android.R.id.text1, LibContent.ITEMS);
-                break;
-
-        }
+        mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
+                android.R.layout.simple_list_item_single_choice, android.R.id.text1, getItems());
     }
 
     @Override
@@ -246,9 +236,15 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
         }
         report.saveInBackground();
         Toast.makeText(getActivity(),
-                "Saving facility details",Toast.LENGTH_LONG).show();
-
-    }
+                "Saving facility details..",Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(),
+                        "Saved",Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }}, 3000);
+        }
 
     @Override
     public void onDetach() {
@@ -258,12 +254,26 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
+        if (null != mListener && getItems() != null) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(fac.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(getItems().get(position).id);
             parameter = position;
         }
+    }
+
+    public List<FacilityItem> getItems() {
+        switch (position) {
+            case BARRIER:
+                return new FacilityContent(getActivity()).ITEMS;
+            case TOILETS:
+                return new ToiletContent(getActivity()).ITEMS;
+            case DRINKING:
+                return new DrinkingContent(getActivity()).ITEMS;
+            case LIB:
+                return new LibContent(getActivity()).ITEMS;
+        }
+        return new ArrayList<FacilityItem>();
     }
 
     /**

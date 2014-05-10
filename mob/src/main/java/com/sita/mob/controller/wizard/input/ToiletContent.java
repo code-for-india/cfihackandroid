@@ -1,5 +1,7 @@
 package com.sita.mob.controller.wizard.input;
 
+import android.content.Context;
+import com.sita.mob.R;
 import com.sita.mob.model.FacilityItem;
 
 import java.util.ArrayList;
@@ -18,20 +20,24 @@ public class ToiletContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static List<FacilityItem> ITEMS = new ArrayList<FacilityItem>();
+    public List<FacilityItem> ITEMS = new ArrayList<FacilityItem>();
 
+    public Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
 
-    public static Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
-
-static {
+    public ToiletContent(Context context) {
         // Add 3 sample items.
-        addItem(new FacilityItem("1", "Lib Not Available!"));
-        addItem(new FacilityItem("2", "Ramps - no handrails"));
-        addItem(new FacilityItem("3", "Good ramps"));
-        }
+        addItem(new FacilityItem("1", context.getString(R.string.toilet_work)));
+        addItem(new FacilityItem("2", context.getString(R.string.toilet_dirty)));
+        addItem(new FacilityItem("3", context.getString(R.string.toilet_brk)));
+        addItem(new FacilityItem("4", context.getString(R.string.toilet_door)));
+        addItem(new FacilityItem("5", context.getString(R.string.toilet_lock)));
+        addItem(new FacilityItem("6", context.getString(R.string.toilet_water)));
+        addItem(new FacilityItem("7", context.getString(R.string.toilet_sewage)));
+        addItem(new FacilityItem("8", context.getString(R.string.toilet_na)));
+    }
 
-private static void addItem(FacilityItem item) {
+    private void addItem(FacilityItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
-        }
- }
+    }
+}

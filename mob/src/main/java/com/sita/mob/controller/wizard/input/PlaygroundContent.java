@@ -1,6 +1,5 @@
 package com.sita.mob.controller.wizard.input;
 
-import android.app.Activity;
 import android.content.Context;
 import com.sita.mob.R;
 import com.sita.mob.model.FacilityItem;
@@ -13,10 +12,11 @@ import java.util.Map;
 /**
  * Created by smurali on 5/10/14.
  */
+
 /**
  * A map of sample (dummy) items, by ID.
  */
-public class LibContent {
+public class PlaygroundContent {
     /**
      * An array of sample (dummy) items.
      */
@@ -24,7 +24,7 @@ public class LibContent {
 
     public Map<String, FacilityItem> ITEM_MAP = new HashMap<String, FacilityItem>();
 
-    public LibContent(Context context) {
+    public PlaygroundContent(Context context) {
         // Add 3 sample items.
         addItem(new FacilityItem("1", context.getString(R.string.lib_stocked)));
         addItem(new FacilityItem("2", context.getString(R.string.lib_locked)));
@@ -33,10 +33,10 @@ public class LibContent {
         addItem(new FacilityItem("5", context.getString(R.string.lib_insuff)));
         addItem(new FacilityItem("6", context.getString(R.string.lib_na)));
 
-        }
+    }
 
-private void addItem(FacilityItem item) {
+    private void addItem(FacilityItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
+    }
 }
- }

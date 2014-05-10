@@ -22,6 +22,21 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_grid">GridActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_facility_grid">FacilityGridActivity</string>
+    <string name="title_activity_facility_grid">Choose Facility to Report</string>
 
+    <!-- LIBRARY -->
+    <string name="lib_na">Library facility - not available </string>
+    <string name="lib_insuff">Library facility - Insufficient number of books </string>
+    <string name="lib_no_time"> Library facility - No time alloted in the timetable </string>
+    <string name="lib_beyond">Library facility - Books kept beyond student\'s reach </string>
+    <string name="lib_locked"> Library facility Locked </string>
+    <string name="lib_stocked">Well stocked library </string>
+    <string name="toilet_work">Working fine</string>
+    <string name="toilet_dirty">Dirty</string>
+    <string name="toilet_brk">Broken</string>
+    <string name="toilet_door">No Door</string>
+    <string name="toilet_lock">No Lock</string>
+    <string name="toilet_water">No Water</string>
+    <string name="toilet_sewage">No Sewage mechanism</string>
+    <string name="toilet_na">Not available</string>
 </resources>
