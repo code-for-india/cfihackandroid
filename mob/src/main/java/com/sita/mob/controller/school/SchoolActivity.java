@@ -32,10 +32,12 @@ public class SchoolActivity extends Activity {
         schoolSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String schoolCode = schoolNameIdMap.get(textView.getText());
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.putExtra("schoolCode", schoolCode);
-                startActivity(intent);
+                String schoolCode = schoolNameIdMap.get(textView.getText().toString().trim());
+                if (schoolCode != null) {
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra("schoolCode", schoolCode);
+                    startActivity(intent);
+                }
             }
         });
 
