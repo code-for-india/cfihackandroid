@@ -1,21 +1,27 @@
 package com.sita.mob.controller.facility;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.TextView;
+import android.widget.*;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 import com.sita.mob.R;
-
 import com.sita.mob.controller.wizard.dummy.FacilityContent;
-import com.sita.mob.model.Facility;
 import com.sita.mob.model.FacilityItem;
-import org.codepond.wizardroid.WizardStep;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * STEP in wizard - each facility.
@@ -25,13 +31,30 @@ import org.codepond.wizardroid.WizardStep;
  * with a GridView.
  * <p />
  */
-public class FacilityFragment extends WizardStep implements AbsListView.OnItemClickListener {
-//    @ContextVariable
-//    private int step;
-
-    public static Facility facility = new Facility();
-
+public class FacilityFragment extends Fragment implements AbsListView.OnItemClickListener {
     private OnFragmentInteractionListener mListener;
+    private ImageView mPhotoView;
+    private Button mPhotoBtn;
+    private Button mSaveBtn;
+    private String facilityNumber = "1";
+    private String schoolCode = "24010309102";
+    ParseFile photoFile;
+
+    Button.OnClickListener mTakePicOnClickListener =
+            new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dispatchTakePictureIntent();
+                }
+            };
+
+    Button.OnClickListener mSaveOnClickListener =
+            new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveFacility();
+                }
+            };
 
     /**
      * The fragment's ListView/GridView.
@@ -59,13 +82,70 @@ public class FacilityFragment extends WizardStep implements AbsListView.OnItemCl
     public FacilityFragment() {
     }
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            Bundle extras = data.
+                    getExtras();
+            Bitmap rawImg = (Bitmap) extras.get("data");
+
+            saveScaledPhoto(rawImg);
+        }
+    }
+
+    private void saveScaledPhoto(Bitmap rawImg) {
+
+        // Resize photo from camera byte array
+        Bitmap scaledImg = Bitmap.createScaledBitmap(rawImg, 200, 200
+                * rawImg.getHeight() / rawImg.getWidth(), false);
+
+        // Override Android default landscape orientation and save portrait
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        Bitmap rotatedScaledMealImage = Bitmap.createBitmap(scaledImg, 0,
+                0, scaledImg.getWidth(), scaledImg.getHeight(),
+                matrix, true);
+
+        // Set image in view
+        mPhotoView.setImageBitmap(scaledImg);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        rotatedScaledMealImage.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+        byte[] scaledData = bos.toByteArray();
+
+        // Save the scaled image to Parse
+        photoFile = new ParseFile("facility_photo.jpg", scaledData);
+        photoFile.saveInBackground(new SaveCallback() {
+
+            public void done(ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getActivity(),
+                            "Error saving: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    // saveFacility();
+                }
+            }
+        });
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // TODO: Change Adapter to display your content
         mAdapter = new ArrayAdapter<FacilityItem>(getActivity(),
-                R.layout.facility_item_row, android.R.id.text1, FacilityContent.ITEMS);
+                android.R.layout.simple_list_item_single_choice, android.R.id.text1, FacilityContent.ITEMS);
     }
 
     @Override
@@ -76,9 +156,14 @@ public class FacilityFragment extends WizardStep implements AbsListView.OnItemCl
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        mPhotoView = (ImageView) view.findViewById(R.id.photo);
+        mPhotoBtn = (Button) view.findViewById(R.id.takePhoto);
+        mPhotoBtn.setOnClickListener(mTakePicOnClickListener);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        mSaveBtn = (Button)view.findViewById(R.id.save_button);
+        mSaveBtn.setOnClickListener(mSaveOnClickListener);
 
         return view;
     }
@@ -94,12 +179,26 @@ public class FacilityFragment extends WizardStep implements AbsListView.OnItemCl
         }
     }
 
+    public void saveFacility() {
+        ParseObject report = new ParseObject("report2");
+        report.put("schoolCode", schoolCode);
+        report.put("facilityNumber", facilityNumber);
+        report.put("comments", "dummyComments");
+        report.put("parameterNumber", 3);
+        if (photoFile != null) {
+            report.put("fileName", photoFile);
+        }
+        report.saveInBackground();
+        Toast.makeText(getActivity(),
+                "Saving facility details",Toast.LENGTH_LONG).show();
+
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

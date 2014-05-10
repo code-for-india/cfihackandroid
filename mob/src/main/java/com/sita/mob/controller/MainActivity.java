@@ -1,22 +1,21 @@
 package com.sita.mob.controller;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.*;
+import android.widget.Button;
 import android.widget.TextView;
+import com.parse.Parse;
+import com.parse.ParseObject;
 import com.sita.mob.R;
 import com.sita.mob.controller.facility.FacilityFragment;
-
+import com.sita.mob.controller.facility.RampsFragment;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, FacilityFragment.OnFragmentInteractionListener {
@@ -44,6 +43,13 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        // App stuff
+        Parse.initialize(this, "3P4Yf9CyJU9up39DrDEvfxrEkBXFvqkTopkSJRNl", "dX08aQhiuE3ndPo4K2hY30lhxHfaMPHPUwi9sE5U");
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo1", "bar");
+        testObject.saveInBackground();
     }
 
     @Override
@@ -52,7 +58,7 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, new DataCollectorWizardFragment())
+                .replace(R.id.container, RampsFragment.newInstance())
                 .commit();
     }
 
