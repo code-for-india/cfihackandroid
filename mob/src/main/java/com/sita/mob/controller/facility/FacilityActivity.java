@@ -38,12 +38,12 @@ public class FacilityActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         int pos = getIntent().getIntExtra(FacilityFragment.NavigationDrawerFragment.STATE_SELECTED_POSITION, 0);
-        Log.e("SITA", pos + "");
+        String schoolCode = getIntent().getStringExtra("schoolCode");
 
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, FacilityFragment.newInstance(pos))
+                .replace(R.id.container, FacilityFragment.newInstance(pos, schoolCode))
                 .commit();
     }
 
@@ -58,7 +58,7 @@ public class FacilityActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, FacilityFragment.newInstance(position))
+                .replace(R.id.container, FacilityFragment.newInstance(position, getIntent().getStringExtra("schoolCode")))
                 .commit();
     }
 

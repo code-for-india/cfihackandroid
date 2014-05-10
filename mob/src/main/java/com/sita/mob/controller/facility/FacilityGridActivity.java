@@ -28,7 +28,9 @@ public class FacilityGridActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Toast.makeText(FacilityGridActivity.this, "" + pos, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(FacilityGridActivity.this, FacilityActivity.class);
+                String schoolCode = getIntent().getStringExtra("schoolCode");
                 intent.putExtra(FacilityFragment.NavigationDrawerFragment.STATE_SELECTED_POSITION, pos);
+                intent.putExtra("schoolCode", schoolCode);
                 startActivity(intent);
             }
         });

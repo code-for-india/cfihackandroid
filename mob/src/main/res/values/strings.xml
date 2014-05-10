@@ -22,7 +22,9 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_grid">GridActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_facility_grid">Choose Facility to Report</string>
+    <string name="title_activity_facility_grid">Choose Facility</string>
+    <string name="title_grid">Tap on a facility image (Ramps, Restrooms, Water Supply, Playgrounds, Library) to report
+        status</string>
 
     <!-- LIBRARY -->
     <string name="lib_descr">Library is an important facility for kids. What\'s the status?</string>
@@ -62,4 +64,6 @@
     <string name="play_uneven">Uneven</string>
     <string name="play_used">Used for other purposes</string>
     <string name="play_not">Does not exist</string>
+    <string name="enter_school">Please enter your school name</string>
+    <string name="start">Start</string>
 </resources>

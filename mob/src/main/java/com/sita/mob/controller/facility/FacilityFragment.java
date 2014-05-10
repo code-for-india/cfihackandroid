@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
+import android.text.TextUtils;
 import android.view.*;
 import android.widget.*;
 import com.parse.*;
@@ -41,8 +42,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     private ImageView mPhotoView;
     private Button mPhotoBtn;
     private Button mSaveBtn;
-    private String facilityNumber = "1";
-    private String schoolCode = "24010309102";
+    private String schoolCode;
     private TextView descr;
     ParseFile photoFile;
     int parameter;
@@ -90,10 +90,11 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static FacilityFragment newInstance(int position) {
+    public static FacilityFragment newInstance(int position, String schoolCode) {
         FacilityFragment fragment = new FacilityFragment();
         Bundle args = new Bundle();
         args.putInt("POS", position);
+        args.putString("schoolCode", schoolCode);
         fragment.setArguments(args);
         return fragment;
     }
@@ -214,7 +215,7 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        schoolCode = getArguments().getString("schoolCode");
     }
 
     @Override
@@ -229,13 +230,16 @@ public class FacilityFragment extends Fragment implements AbsListView.OnItemClic
     }
 
     public void saveFacility() {
-        ParseObject report = new ParseObject("report2");
-        report.put("schoolCode", schoolCode);
-        report.put("facilityNumber", facilityNumber);
+        ParseObject report = new ParseObject("report");
+        if (!TextUtils.isEmpty(schoolCode)) {
+            report.put("schoolCode", schoolCode);
+        }
+        report.put("status", "OPEN");
+        report.put("facilityNumber", position + 1);
         report.put("comments", "dummyComments");
         report.put("parameterNumber", parameter+1);
         if (photoFile != null) {
-            report.put("fileName", photoFile);
+            report.put("photo", photoFile);
         }
         report.saveInBackground();
         Toast.makeText(getActivity(),

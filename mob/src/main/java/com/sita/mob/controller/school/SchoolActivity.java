@@ -3,6 +3,8 @@ package com.sita.mob.controller.school;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -49,8 +51,10 @@ public class SchoolActivity extends Activity {
                     for (ParseObject parseObject : objects) {
                         String schoolName = (String) parseObject.get("schoolName");
                         String schoolCode = (String) parseObject.get("schoolCode");
-                        schoolNames.add(schoolName);
-                        schoolNameIdMap.put(schoolName, schoolCode);
+                        if (!TextUtils.isEmpty(schoolName)) {
+                            schoolNames.add(schoolName);
+                            schoolNameIdMap.put(schoolName, schoolCode);
+                        }
                     }
                     autocomplete(schoolNames);
 
@@ -66,6 +70,7 @@ public class SchoolActivity extends Activity {
                 String[] schoolNamesArray = schoolNames.toArray(new String[schoolNames.size()]);
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(SchoolActivity.this, android.R.layout.simple_dropdown_item_1line, schoolNamesArray);
+                Log.d("TAG","schoolNamesArray.toString() = " + schoolNamesArray.toString());
                 textView.setAdapter(adapter);
             }
         });
